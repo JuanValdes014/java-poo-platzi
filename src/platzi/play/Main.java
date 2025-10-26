@@ -2,6 +2,7 @@ package platzi.play;
 
 import platzi.play.contenido.Pelicula;
 import platzi.play.plataforma.Usuario;
+import platzi.play.util.ScannerUtils;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -11,45 +12,31 @@ public class Main{
   public static void main(String[] args){
       System.out.println("Platzi play! ");
 
+      String nombre = ScannerUtils.CapturarTexto("Nombre del contenido");
+      String genero = ScannerUtils.CapturarTexto("Genero del contenido");
+      int duracion = ScannerUtils.CapturarNumero("Duracion del contenido");
+      double calificacion = ScannerUtils.CapturarDecimal("Calificacion del contenido");
+
       // Instanciamos objeto
       Pelicula pelicula = new Pelicula();
-      pelicula.titulo = "El señor de los anillos";
+      pelicula.titulo = nombre;
       pelicula.fechaEstreno = LocalDate.of(2018,10,15);
-      pelicula.genero = "Fantasía";
-
+      pelicula.genero = genero;
       // Generamos calificación
-      pelicula.calificar(4.7);
+      pelicula.calificar(calificacion);
+      pelicula.duracion = duracion;
+
 
       // Imprimimos ficha tecnica
       System.out.println(pelicula.obtenerFichaTecnica());
-
-      pelicula.duracion = 120;
-
-      long duracionLong = pelicula.duracion;
-      int calificacionInt = (int)pelicula.calificacion;
-      long numeroDePremios = Long.parseLong("25");
-
-      System.out.println("Duración long: " + duracionLong);
-      System.out.println("Calificación int: " + calificacionInt);
-      System.out.println("Número de premios: " + numeroDePremios);
 
       // Instanciamos objeto de usuario
       Usuario usuario = new Usuario();
       usuario.nombre = "Juan";
       usuario.email = "cliente@sincorreo.com";
       usuario.fechaRegistro = LocalDateTime.of(2025,12,11,17,15, 12);
+
       // Imprimimos
       usuario.ver(pelicula);
-      //Scanner scanner = new Scanner(System.in);
-      //System.out.println("Cual es tu nombre?: ");
-      //String nombre = scanner.nextLine();
-
-      //System.out.println("Hola "  + nombre + ", esto es una prueba de platzi play");
-
-      //System.out.println("Cuantos años tienes?:");
-
-      //Integer edad = scanner.nextInt();
-
-      //System.out.println(nombre + " puedes ver contenido +" + edad);
   }
 }
