@@ -23,6 +23,16 @@ public class Main{
       // Imprimimos ficha tecnica
       System.out.println(pelicula.obtenerFichaTecnica());
 
+      pelicula.duracion = 120;
+
+      long duracionLong = pelicula.duracion;
+      int calificacionInt = (int)pelicula.calificacion;
+      long numeroDePremios = Long.parseLong("25");
+
+      System.out.println("Duración long: " + duracionLong);
+      System.out.println("Calificación int: " + calificacionInt);
+      System.out.println("Número de premios: " + numeroDePremios);
+
       // Instanciamos objeto de usuario
       Usuario usuario = new Usuario();
       usuario.nombre = "Juan";
