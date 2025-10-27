@@ -22,8 +22,9 @@ public class Main{
 
       // Instanciamos objeto
       Pelicula pelicula = new Pelicula(nombre, duracion, genero, calificacion);
+      //pelicula.calificacion = 50;
       //pelicula.titulo = nombre;
-      pelicula.fechaEstreno = LocalDate.of(2018,10,15);
+      // pelicula.fechaEstreno = LocalDate.of(2018,10,15);
       //pelicula.genero = genero;
       // Generamos calificación
       pelicula.calificar(calificacion);
