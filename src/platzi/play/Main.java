@@ -24,6 +24,9 @@ public class Main{
 
       System.out.println(NOMBRE_PLATAFORMA + " v" + VERSION);
 
+      // Precargamos peliculas de prueba
+      cargarPeliculas(plataforma);
+
       while (true) {
           int opcionElegida = ScannerUtils.CapturarNumero("""
                   Ingrese una de las siguientes opciones: 
@@ -48,42 +51,40 @@ public class Main{
               }
               case MOSTRAR_TODO -> plataforma.mostrarTitulos();
               case BUSCAR_POR_TITULO -> {
-                  // Falta
+                  String nombreBuscado = ScannerUtils.CapturarTexto("Nombre del contenido a buscar");
+                  Pelicula pelicula = plataforma.buscarPorTitulo(nombreBuscado);
+
+                  if(pelicula != null){
+                      System.out.println(pelicula.obtenerFichaTecnica());
+                  } else {
+                      System.out.println(nombreBuscado + " no existe dentro de " + plataforma.getNombre());
+                  }
               }
               case ELIMINAR -> {
-                  // Falta
+                  String nombreAEliminar = ScannerUtils.CapturarTexto("Nombre del contenido a eliminar");
+                  Pelicula pelicula = plataforma.buscarPorTitulo(nombreAEliminar);
+
+                  if(pelicula != null){
+                      plataforma.eliminar(pelicula);
+                      System.out.println(nombreAEliminar + " eliminado exitosamente");
+                  } else {
+                      System.out.println(nombreAEliminar + " no existe dentro de " + plataforma.getNombre());
+                  }
               }
               case SALIR -> System.exit(0);
           }
       }
-//
-//      String nombre = ScannerUtils.CapturarTexto("Nombre del contenido");
-//      String genero = ScannerUtils.CapturarTexto("Genero del contenido");
-//      int duracion = ScannerUtils.CapturarNumero("Duracion del contenido");
-//      double calificacion = ScannerUtils.CapturarDecimal("Calificacion del contenido");
-//
-//      // Instanciamos objeto
-//      Pelicula pelicula = new Pelicula(nombre, duracion, genero, calificacion);
-//      Pelicula pelicula2 = new Pelicula("F1 the movie", 223, "Acción");
-//
-//      plataforma.agregar(pelicula);
-//      plataforma.agregar(pelicula2);
-//
-//      System.out.println("Número de elementos en la plataforma " + plataforma.getContenido().size() + "\n");
-//
-//      // Imprimimos ficha tecnica
-//      System.out.println(pelicula.obtenerFichaTecnica());
-//
-//      plataforma.eliminar(pelicula2);
-//
-//      plataforma.mostrarTitulos();
-//
-//      // Instanciamos objeto de usuario
-//      Usuario usuario = new Usuario("Juan", "cliente@sincorreo.com");
-//
-//      usuario.fechaRegistro = LocalDateTime.of(2025,12,11,17,15, 12);
-//
-//      // Imprimimos
-//      usuario.ver(pelicula);
+  }
+
+  private static void cargarPeliculas(Plataforma plataforma) {
+      plataforma.agregar(new Pelicula("Sherk", 93, "Animada"));
+      plataforma.agregar(new Pelicula("Inception", 143, "Ciencia ficción"));
+      plataforma.agregar(new Pelicula("Titanic", 129, "Drama", 3.4));
+      plataforma.agregar(new Pelicula("john wick", 101, "Acción"));
+      plataforma.agregar(new Pelicula("El conjuro", 193, "Terror"));
+      plataforma.agregar(new Pelicula("Avengers: endgame", 183, "Acción"));
+      plataforma.agregar(new Pelicula("Coco", 113, "Animada"));
+      plataforma.agregar(new Pelicula("Interstellar", 142, "Ciencia ficcion"));
+      plataforma.agregar(new Pelicula("Toy story", 143, "Animada"));
   }
 }
