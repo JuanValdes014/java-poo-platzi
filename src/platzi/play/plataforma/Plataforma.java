@@ -2,6 +2,7 @@ package platzi.play.plataforma;
 
 import platzi.play.contenido.Genero;
 import platzi.play.contenido.Pelicula;
+import platzi.play.excepcion.PeliculaExistenteExcepcion;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -17,6 +18,12 @@ public class Plataforma {
     }
 
     public void agregar(Pelicula elemento) {
+        Pelicula contenido = this.buscarPorTitulo(elemento.getTitulo());
+
+        if(contenido != null) {
+            throw new PeliculaExistenteExcepcion(elemento.getTitulo());
+        }
+
         this.contenido.add(elemento);
     }
 

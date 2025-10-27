@@ -55,8 +55,12 @@ public class Main{
                   int duracion = ScannerUtils.CapturarNumero("Duracion del contenido");
                   double calificacion = ScannerUtils.CapturarDecimal("Calificacion del contenido");
 
-                  // Insertamos registro
-                  plataforma.agregar(new Pelicula(nombre, duracion, genero, calificacion));
+                  try {
+                      // Insertamos registro
+                      plataforma.agregar(new Pelicula(nombre, duracion, genero, calificacion));
+                  }catch (Exception e){
+                      System.out.println(e.getMessage());
+                  }
               }
               case MOSTRAR_TODO -> {
                   List<String> titulos = plataforma.getTitulos();
