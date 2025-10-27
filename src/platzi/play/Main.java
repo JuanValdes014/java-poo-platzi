@@ -7,6 +7,7 @@ import platzi.play.util.ScannerUtils;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main{
@@ -16,8 +17,9 @@ public class Main{
   public static final int AGREGAR = 1;
   public static final int MOSTRAR_TODO = 2;
   public static final int BUSCAR_POR_TITULO = 3;
-  public static final int ELIMINAR = 4;
-  public static final int SALIR = 5;
+  public static final int BUSCAR_POR_GENERO = 4;
+  public static final int ELIMINAR = 8;
+  public static final int SALIR = 9;
 
   public static void main(String[] args){
       Plataforma plataforma = new Plataforma(NOMBRE_PLATAFORMA);
@@ -33,8 +35,9 @@ public class Main{
                   1. Agregar contenido
                   2. Mostrar todo
                   3. Buscar por titulo
-                  4. Eliminar
-                  5. Salir
+                  4. Buscar por genero
+                  8. Eliminar
+                  9. Salir
                   """);
 
           System.out.println("Opción elegida: " + opcionElegida);
@@ -60,6 +63,12 @@ public class Main{
                       System.out.println(nombreBuscado + " no existe dentro de " + plataforma.getNombre());
                   }
               }
+              case BUSCAR_POR_GENERO -> {
+                  String nombreGeneroBuscado = ScannerUtils.CapturarTexto("Nombre del genero a buscar");
+                  List<Pelicula> contenidoPorGenero = plataforma.buscarPorGenero(nombreGeneroBuscado);
+                  System.out.println(contenidoPorGenero.size() + " encontrados para el genero: " + nombreGeneroBuscado);
+                  contenidoPorGenero.forEach(contenido -> System.out.println(contenido.obtenerFichaTecnica() + "\n"));
+              }
               case ELIMINAR -> {
                   String nombreAEliminar = ScannerUtils.CapturarTexto("Nombre del contenido a eliminar");
                   Pelicula pelicula = plataforma.buscarPorTitulo(nombreAEliminar);
@@ -77,14 +86,14 @@ public class Main{
   }
 
   private static void cargarPeliculas(Plataforma plataforma) {
-      plataforma.agregar(new Pelicula("Sherk", 93, "Animada"));
-      plataforma.agregar(new Pelicula("Inception", 143, "Ciencia ficción"));
+      plataforma.agregar(new Pelicula("Sherk", 93, "Animada",4.5));
+      plataforma.agregar(new Pelicula("Inception", 143, "Ciencia ficción", 3.2));
       plataforma.agregar(new Pelicula("Titanic", 129, "Drama", 3.4));
-      plataforma.agregar(new Pelicula("john wick", 101, "Acción"));
-      plataforma.agregar(new Pelicula("El conjuro", 193, "Terror"));
-      plataforma.agregar(new Pelicula("Avengers: endgame", 183, "Acción"));
-      plataforma.agregar(new Pelicula("Coco", 113, "Animada"));
-      plataforma.agregar(new Pelicula("Interstellar", 142, "Ciencia ficcion"));
-      plataforma.agregar(new Pelicula("Toy story", 143, "Animada"));
+      plataforma.agregar(new Pelicula("john wick", 101, "Acción", 3.6));
+      plataforma.agregar(new Pelicula("El conjuro", 193, "Terror", 4.8));
+      plataforma.agregar(new Pelicula("Avengers: endgame", 183, "Acción", 4.3));
+      plataforma.agregar(new Pelicula("Coco", 113, "Animada", 3.7));
+      plataforma.agregar(new Pelicula("Interstellar", 142, "Ciencia ficcion", 3.9));
+      plataforma.agregar(new Pelicula("Toy story", 143, "Animada", 2.5));
   }
 }

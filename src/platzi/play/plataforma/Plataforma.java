@@ -19,9 +19,7 @@ public class Plataforma {
     }
 
     public void mostrarTitulos() {
-        for(Pelicula pelicula : this.contenido) {
-            System.out.println(pelicula.getTitulo());
-        }
+        contenido.forEach(contenido -> System.out.println(contenido.getTitulo()));
     }
 
     public void eliminar(Pelicula elemento) {
@@ -29,13 +27,16 @@ public class Plataforma {
     }
 
     public Pelicula buscarPorTitulo(String titulo) {
-        for(Pelicula pelicula : this.contenido) {
-            if(pelicula.getTitulo().equalsIgnoreCase(titulo)) {
-                return pelicula;
-            }
-        }
+        return contenido.stream()
+                .filter(contenido -> contenido.getTitulo().equalsIgnoreCase(titulo))
+                .findFirst()
+                .orElse(null);
+    }
 
-        return null;
+    public List<Pelicula> buscarPorGenero(String genero) {
+        return contenido.stream()
+                .filter(contenido -> contenido.getGenero().equalsIgnoreCase(genero))
+                .toList();
     }
 
     public String getNombre() {
