@@ -21,22 +21,21 @@ public class Main{
       double calificacion = ScannerUtils.CapturarDecimal("Calificacion del contenido");
 
       // Instanciamos objeto
-      Pelicula pelicula = new Pelicula();
-      pelicula.titulo = nombre;
+      Pelicula pelicula = new Pelicula(nombre, duracion, genero, calificacion);
+      //pelicula.titulo = nombre;
       pelicula.fechaEstreno = LocalDate.of(2018,10,15);
-      pelicula.genero = genero;
+      //pelicula.genero = genero;
       // Generamos calificación
       pelicula.calificar(calificacion);
-      pelicula.duracion = duracion;
+      //pelicula.duracion = duracion;
 
 
       // Imprimimos ficha tecnica
       System.out.println(pelicula.obtenerFichaTecnica());
 
       // Instanciamos objeto de usuario
-      Usuario usuario = new Usuario();
-      usuario.nombre = "Juan";
-      usuario.email = "cliente@sincorreo.com";
+      Usuario usuario = new Usuario("Juan", "cliente@sincorreo.com");
+
       usuario.fechaRegistro = LocalDateTime.of(2025,12,11,17,15, 12);
 
       // Imprimimos
