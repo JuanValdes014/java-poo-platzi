@@ -1,5 +1,6 @@
 package platzi.play;
 
+import platzi.play.contenido.Genero;
 import platzi.play.contenido.Pelicula;
 import platzi.play.plataforma.Plataforma;
 import platzi.play.plataforma.Usuario;
@@ -50,7 +51,7 @@ public class Main{
           switch (opcionElegida) {
               case AGREGAR -> {
                   String nombre = ScannerUtils.CapturarTexto("Nombre del contenido");
-                  String genero = ScannerUtils.CapturarTexto("Genero del contenido");
+                  Genero genero = ScannerUtils.CapturarGenero("Genero del contenido");
                   int duracion = ScannerUtils.CapturarNumero("Duracion del contenido");
                   double calificacion = ScannerUtils.CapturarDecimal("Calificacion del contenido");
 
@@ -72,7 +73,7 @@ public class Main{
                   }
               }
               case BUSCAR_POR_GENERO -> {
-                  String nombreGeneroBuscado = ScannerUtils.CapturarTexto("Nombre del genero a buscar");
+                  Genero nombreGeneroBuscado = ScannerUtils.CapturarGenero("Genero del contenido");
                   List<Pelicula> contenidoPorGenero = plataforma.buscarPorGenero(nombreGeneroBuscado);
                   System.out.println(contenidoPorGenero.size() + " encontrados para el genero: " + nombreGeneroBuscado);
                   contenidoPorGenero.forEach(contenido -> System.out.println(contenido.obtenerFichaTecnica() + "\n"));
@@ -101,14 +102,14 @@ public class Main{
   }
 
   private static void cargarPeliculas(Plataforma plataforma) {
-      plataforma.agregar(new Pelicula("Sherk", 93, "Animada",4.5));
-      plataforma.agregar(new Pelicula("Inception", 143, "Ciencia ficción", 3.2));
-      plataforma.agregar(new Pelicula("Titanic", 129, "Drama", 3.4));
-      plataforma.agregar(new Pelicula("john wick", 101, "Acción", 3.6));
-      plataforma.agregar(new Pelicula("El conjuro", 193, "Terror", 4.8));
-      plataforma.agregar(new Pelicula("Avengers: endgame", 183, "Acción", 4.3));
-      plataforma.agregar(new Pelicula("Coco", 113, "Animada", 3.7));
-      plataforma.agregar(new Pelicula("Interstellar", 142, "Ciencia ficcion", 5));
-      plataforma.agregar(new Pelicula("Toy story", 143, "Animada", 2.5));
+      plataforma.agregar(new Pelicula("Sherk", 93, Genero.ANIMADA,4.5));
+      plataforma.agregar(new Pelicula("Inception", 143, Genero.CIENCIA_FICCION, 3.2));
+      plataforma.agregar(new Pelicula("Titanic", 129, Genero.DRAMA, 3.4));
+      plataforma.agregar(new Pelicula("john wick", 101, Genero.ACCION, 3.6));
+      plataforma.agregar(new Pelicula("El conjuro", 193, Genero.TERROR, 4.8));
+      plataforma.agregar(new Pelicula("Avengers: endgame", 183, Genero.ACCION, 4.3));
+      plataforma.agregar(new Pelicula("Coco", 113, Genero.ANIMADA, 3.7));
+      plataforma.agregar(new Pelicula("Interstellar", 142, Genero.CIENCIA_FICCION, 5));
+      plataforma.agregar(new Pelicula("Toy story", 143, Genero.ANIMADA, 2.5));
   }
 }
