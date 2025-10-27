@@ -1,6 +1,7 @@
 package platzi.play;
 
 import platzi.play.contenido.Pelicula;
+import platzi.play.plataforma.Plataforma;
 import platzi.play.plataforma.Usuario;
 import platzi.play.util.ScannerUtils;
 
@@ -13,6 +14,8 @@ public class Main{
   public static final String VERSION = "1.0.0";
 
   public static void main(String[] args){
+      Plataforma plataforma = new Plataforma(NOMBRE_PLATAFORMA);
+
       System.out.println(NOMBRE_PLATAFORMA + " v" + VERSION);
 
       String nombre = ScannerUtils.CapturarTexto("Nombre del contenido");
@@ -22,17 +25,19 @@ public class Main{
 
       // Instanciamos objeto
       Pelicula pelicula = new Pelicula(nombre, duracion, genero, calificacion);
-      //pelicula.calificacion = 50;
-      //pelicula.titulo = nombre;
-      // pelicula.fechaEstreno = LocalDate.of(2018,10,15);
-      //pelicula.genero = genero;
-      // Generamos calificación
-      pelicula.calificar(calificacion);
-      //pelicula.duracion = duracion;
+      Pelicula pelicula2 = new Pelicula("F1 the movie", 223, "Acción");
 
+      plataforma.agregar(pelicula);
+      plataforma.agregar(pelicula2);
+
+      System.out.println("Número de elementos en la plataforma " + plataforma.getContenido().size() + "\n");
 
       // Imprimimos ficha tecnica
       System.out.println(pelicula.obtenerFichaTecnica());
+
+      plataforma.eliminar(pelicula2);
+
+      plataforma.mostrarTitulos();
 
       // Instanciamos objeto de usuario
       Usuario usuario = new Usuario("Juan", "cliente@sincorreo.com");

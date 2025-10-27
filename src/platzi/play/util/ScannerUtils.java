@@ -9,7 +9,7 @@ public class ScannerUtils {
         System.out.println(mensaje + ": ");
         return SCANNER.nextLine();
     }
-    
+
     public static int CapturarNumero(String mensaje) {
         System.out.println(mensaje + ": ");
 
