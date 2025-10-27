@@ -17,7 +17,8 @@ public class Main{
   public static final int AGREGAR = 1;
   public static final int MOSTRAR_TODO = 2;
   public static final int BUSCAR_POR_TITULO = 3;
-  public static final int BUSCAR_POR_GENERO = 4;
+    public static final int BUSCAR_POR_GENERO = 4;
+    public static final int VER_POPULARES = 5;
   public static final int ELIMINAR = 8;
   public static final int SALIR = 9;
 
@@ -29,6 +30,9 @@ public class Main{
       // Precargamos peliculas de prueba
       cargarPeliculas(plataforma);
 
+      //
+      System.out.println("Más de " + plataforma.getDuracionTotal() + " minutos de contenido.");
+
       while (true) {
           int opcionElegida = ScannerUtils.CapturarNumero("""
                   Ingrese una de las siguientes opciones: 
@@ -36,6 +40,7 @@ public class Main{
                   2. Mostrar todo
                   3. Buscar por titulo
                   4. Buscar por genero
+                  5. Ver populares
                   8. Eliminar
                   9. Salir
                   """);
@@ -52,7 +57,10 @@ public class Main{
                   // Insertamos registro
                   plataforma.agregar(new Pelicula(nombre, duracion, genero, calificacion));
               }
-              case MOSTRAR_TODO -> plataforma.mostrarTitulos();
+              case MOSTRAR_TODO -> {
+                  List<String> titulos = plataforma.getTitulos();
+                  titulos.forEach(System.out::println);
+              }
               case BUSCAR_POR_TITULO -> {
                   String nombreBuscado = ScannerUtils.CapturarTexto("Nombre del contenido a buscar");
                   Pelicula pelicula = plataforma.buscarPorTitulo(nombreBuscado);
@@ -68,6 +76,13 @@ public class Main{
                   List<Pelicula> contenidoPorGenero = plataforma.buscarPorGenero(nombreGeneroBuscado);
                   System.out.println(contenidoPorGenero.size() + " encontrados para el genero: " + nombreGeneroBuscado);
                   contenidoPorGenero.forEach(contenido -> System.out.println(contenido.obtenerFichaTecnica() + "\n"));
+              }
+              case VER_POPULARES -> {
+                  int cantidad = ScannerUtils.CapturarNumero("Cantidad de resultados a mostrar: ");
+                  // Filtramos por cantidad
+                  List<Pelicula> contenidoPopulares = plataforma.getPopulares(cantidad);
+
+                  contenidoPopulares.forEach(contenido -> System.out.println(contenido.obtenerFichaTecnica() + "\n"));
               }
               case ELIMINAR -> {
                   String nombreAEliminar = ScannerUtils.CapturarTexto("Nombre del contenido a eliminar");
@@ -93,7 +108,7 @@ public class Main{
       plataforma.agregar(new Pelicula("El conjuro", 193, "Terror", 4.8));
       plataforma.agregar(new Pelicula("Avengers: endgame", 183, "Acción", 4.3));
       plataforma.agregar(new Pelicula("Coco", 113, "Animada", 3.7));
-      plataforma.agregar(new Pelicula("Interstellar", 142, "Ciencia ficcion", 3.9));
+      plataforma.agregar(new Pelicula("Interstellar", 142, "Ciencia ficcion", 5));
       plataforma.agregar(new Pelicula("Toy story", 143, "Animada", 2.5));
   }
 }

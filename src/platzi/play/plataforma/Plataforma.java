@@ -3,6 +3,7 @@ package platzi.play.plataforma;
 import platzi.play.contenido.Pelicula;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class Plataforma {
@@ -18,8 +19,10 @@ public class Plataforma {
         this.contenido.add(elemento);
     }
 
-    public void mostrarTitulos() {
-        contenido.forEach(contenido -> System.out.println(contenido.getTitulo()));
+    public List<String> getTitulos() {
+        return contenido.stream()
+                .map(Pelicula::getTitulo)
+                .toList();
     }
 
     public void eliminar(Pelicula elemento) {
@@ -37,6 +40,19 @@ public class Plataforma {
         return contenido.stream()
                 .filter(contenido -> contenido.getGenero().equalsIgnoreCase(genero))
                 .toList();
+    }
+
+    public List<Pelicula> getPopulares(int cantidad) {
+        return contenido.stream()
+                .sorted(Comparator.comparingDouble(Pelicula::getCalificacion).reversed())
+                .limit(cantidad)
+                .toList();
+    }
+
+    public int getDuracionTotal() {
+        return contenido.stream()
+                        .mapToInt(Pelicula::getDuracion)
+                        .sum();
     }
 
     public String getNombre() {
