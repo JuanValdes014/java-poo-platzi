@@ -1,6 +1,6 @@
 package platzi.play.plataforma;
 
-import platzi.play.contenido.Pelicula;
+import platzi.play.contenido.Contenido;
 
 import java.time.LocalDateTime;
 
@@ -15,9 +15,9 @@ public class Usuario {
     public  String email;
     public LocalDateTime fechaRegistro;
 
-    public void ver(Pelicula pelicula) {
+    public void ver(Contenido contenido) {
         System.out.println(nombre + " está viendo...");
 
-        pelicula.reproducir();
+        contenido.reproducir();
     }
 }
