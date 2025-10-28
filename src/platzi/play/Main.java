@@ -5,8 +5,12 @@ import platzi.play.contenido.Pelicula;
 import platzi.play.contenido.ResumenContenido;
 import platzi.play.plataforma.Plataforma;
 import platzi.play.plataforma.Usuario;
+import platzi.play.util.FileUtils;
 import platzi.play.util.ScannerUtils;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -120,14 +124,6 @@ public class Main{
   }
 
   private static void cargarPeliculas(Plataforma plataforma) {
-      plataforma.agregar(new Pelicula("Sherk", 93, Genero.ANIMADA,4.5));
-      plataforma.agregar(new Pelicula("Inception", 143, Genero.CIENCIA_FICCION, 3.2));
-      plataforma.agregar(new Pelicula("Titanic", 129, Genero.DRAMA, 3.4));
-      plataforma.agregar(new Pelicula("john wick", 101, Genero.ACCION, 3.6));
-      plataforma.agregar(new Pelicula("El conjuro", 193, Genero.TERROR, 4.8));
-      plataforma.agregar(new Pelicula("Avengers: endgame", 183, Genero.ACCION, 4.3));
-      plataforma.agregar(new Pelicula("Coco", 113, Genero.ANIMADA, 3.7));
-      plataforma.agregar(new Pelicula("Interstellar", 142, Genero.CIENCIA_FICCION, 5));
-      plataforma.agregar(new Pelicula("Toy story", 143, Genero.ANIMADA, 2.5));
+    plataforma.getContenido().addAll(FileUtils.leerContenido());
   }
 }
