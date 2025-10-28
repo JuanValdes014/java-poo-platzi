@@ -3,6 +3,7 @@ package platzi.play.util;
 import platzi.play.contenido.Contenido;
 import platzi.play.contenido.Documental;
 import platzi.play.contenido.Genero;
+import platzi.play.contenido.Pelicula;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -68,7 +69,7 @@ public class FileUtils {
                     Contenido contenido;
 
                     if("PELICULA".equals(tipoContenido)){
-                        contenido = new Contenido(titulo, duracion, genero, calificacion);
+                        contenido = new Pelicula(titulo, duracion, genero, calificacion);
                     } else {
                         String narrador = datos[6];
                         contenido = new Documental(titulo, duracion, genero, calificacion, narrador);
